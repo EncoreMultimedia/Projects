@@ -1,0 +1,47 @@
+.main-wrapper {
+  @include pie-clearfix;
+
+}
+
+// Wraps both content and sidebar
+.content-sidebar-wrapper {
+
+}
+
+// Main content box
+.content-main {
+
+  .node-page {
+
+  }
+}
+
+// Site has no sidebars
+.no-sidebars {
+  // Content Wrapper
+  .content-main {
+
+  }
+}
+
+// Site has 1 sidebar
+.one-sidebar {
+  // Content Wrapper
+  .content-wrapper {
+
+  }
+
+  // Main content box
+  .content-main {
+
+  }
+
+  .node-page {
+  }
+
+  // Sidebars wrapper
+  .sidebars {
+
+  }
+}
+

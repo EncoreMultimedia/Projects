@@ -1,0 +1,4 @@
+name = Encore Project Images
+description = Rewrites project image links
+core = 7.x
+package = Other

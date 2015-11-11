@@ -1,0 +1,4 @@
+name = Encore Copyright Block
+description = Provides a block to place the site copyright with an Encore link
+core = 7.x
+package = Other

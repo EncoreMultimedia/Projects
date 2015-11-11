@@ -1,0 +1,51 @@
+<?php
+/**
+ * @file
+ * Module file for encore_project_images.
+ */
+
+/**
+ * @defgroup encore_project_images Example: Block
+ * @ingroup examples
+ * @{
+ * Demonstrates code creation of blocks.
+ *
+ * This is an example outlining how a module can define blocks that can be
+ * displayed on various pages of a site, or how to alter blocks provided by
+ * other modules.
+ */
+
+function encore_project_images_url_inbound_alter(&$path, $original_path, $path_language) {
+  // Grab URL arguments
+  $path_arguments = explode('/', $path);
+
+  // Check if 3 arguments are there
+  if(count($path_arguments) == 3) {
+    // Create node path out of the first two arguments to see if it's a node
+    $node_alias = $path_arguments[0] . "/" . $path_arguments[1];
+
+    if($node_path = drupal_lookup_path('source', $node_alias)) {
+      $node = menu_get_object("node", 1, $node_path);
+
+      // Check if node is of the right type
+      if($node->type == "project") {
+        // Check if third argument is a number
+        if(is_numeric($path_arguments[2])) {
+          // Load images field
+          $images = field_get_items('node', $node, 'field_project_images');
+
+          // Check if the third argument is a delta of the images
+          // if not, redirect to 1
+          if(array_key_exists($path_arguments[2]-1, $images)) {
+            $delta = $path_arguments[2]-1; // Offset for human deltas
+          } else {
+            drupal_goto($node_alias . '/1');
+          }
+
+          // Return entity path
+          $path = 'image_type/project_image/' . $images[$delta]['target_id'];
+        }
+      }
+    }
+  }
+}
